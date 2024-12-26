@@ -7,24 +7,27 @@ public class TestSprite : MonoBehaviour
 
     void Start()
     {
-        StartCoroutine(sparrowRenderer.PlayAnimation("idle"));
+        sparrowRenderer.Play("idle");
     }
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            sparrowRenderer.Play("jump");
-        }
-
+        // Check if W key is pressed
         if (Input.GetKeyDown(KeyCode.W))
         {
             sparrowRenderer.Play("wave");
+        }
+
+        // Check if Space key is pressed
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            sparrowRenderer.Play("jump");
         }
 
         if (!sparrowRenderer.isPlaying)
         {
             sparrowRenderer.Play("idle");
         }
+        
     }
 }

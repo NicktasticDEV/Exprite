@@ -13,7 +13,7 @@ namespace Extrite
         private SpriteRenderer spriteRenderer;
 
         // Fields
-        public SparrowPack animationSet;
+        public SparrowFilePack animationSet;
         //public SparrowPackLoadType loadType;
 
         // XML Data
