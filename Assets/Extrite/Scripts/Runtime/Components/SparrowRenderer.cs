@@ -56,7 +56,7 @@ namespace Extrite
                     timeAccumulator -= timePerFrame;
 
                     SubTexture subTextureFrame = subTextures[frameIndex];
-                    float adjustedY = sparrowAnimationPack.sparrowFilePack.texture.height - subTextureFrame.y - subTextureFrame.height;
+                    float adjustedY = sparrowAnimationPack.texture.height - subTextureFrame.y - subTextureFrame.height;
 
                     Vector2 pivot = new Vector2(
                         (subTextureFrame.frameX - animation.offset.x - sparrowAnimationPack.globalOffset.x) / subTextureFrame.width,
@@ -64,7 +64,7 @@ namespace Extrite
                     );
 
                     spriteRenderer.sprite = Sprite.Create(
-                        sparrowAnimationPack.sparrowFilePack.texture,
+                        sparrowAnimationPack.texture,
                         new Rect(subTextureFrame.x, adjustedY, subTextureFrame.width, subTextureFrame.height),
                         pivot
                     );
