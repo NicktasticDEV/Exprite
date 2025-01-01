@@ -13,22 +13,8 @@ namespace Extrite
 {
     public class Utilities : MonoBehaviour
     {
-        public static void ExportSparrowAnimationPack(SO_SparrowAnimationPack sparrowAnimationPack)
+        public static void ExportSparrowAnimationPack(SO_SparrowAnimationPack sparrowAnimationPack, string path)
         {
-            string path;
-
-            // Will store the binary, the atlas and the texture in a zip file with (.esap) extension
-            #if UNITY_EDITOR
-                // Use the EditorUtility to save the file
-                path = UnityEditor.EditorUtility.SaveFilePanel("Save Sparrow Animation Pack", "", "sparrow_animation_pack", "esap");
-            #elif UNITY_STANDALONE && !UNITY_STANDALONE_OSX
-                // Use the operating system file dialog to save the file
-                path = StandaloneFileBrowser.SaveFilePanel("Save Sparrow Animation Pack", "", "sparrow_animation_pack", "esap");
-            #else
-                Debug.LogError("File dialogue not supported on this platform");
-                return;
-            #endif
-
             if (path.Length == 0)
             {
                 return;

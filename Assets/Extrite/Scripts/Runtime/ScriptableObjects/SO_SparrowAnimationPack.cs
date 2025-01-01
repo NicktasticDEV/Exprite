@@ -54,7 +54,8 @@ public class SO_SparrowAnimationPack : ScriptableObject
     [ContextMenu("Export Animation Pack")]
     public void ExportAnimationPack()
     {
-        Extrite.Utilities.ExportSparrowAnimationPack(this);
+        string path = UnityEditor.EditorUtility.SaveFilePanel("Save Animation Pack", "", "animationPack", "esac");
+        Extrite.Utilities.ExportSparrowAnimationPack(this, path);
     }
 
 }
