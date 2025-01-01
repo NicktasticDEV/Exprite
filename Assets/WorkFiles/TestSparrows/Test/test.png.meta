@@ -1,226 +1,7 @@
 fileFormatVersion: 2
-guid: 88616ad7aa63e4176b7f875b2960ccd2
+guid: 4c4b2a0d4cbe04b41bfe9fa924b2870b
 TextureImporter:
-  internalIDToNameTable:
-  - first:
-      213: -5623194428626525839
-    second: test_0
-  - first:
-      213: -2646800685242748869
-    second: test_1
-  - first:
-      213: -7811834608892705033
-    second: test_2
-  - first:
-      213: 8435826616607337010
-    second: test_3
-  - first:
-      213: 4403086585068172387
-    second: test_4
-  - first:
-      213: 1989914244804095440
-    second: test_5
-  - first:
-      213: -6302306078055872378
-    second: test_6
-  - first:
-      213: -442361578123611599
-    second: test_7
-  - first:
-      213: -5342368469925002225
-    second: test_8
-  - first:
-      213: -1799925587257728388
-    second: test_9
-  - first:
-      213: 9176795453773130875
-    second: test_10
-  - first:
-      213: -6122388586208443171
-    second: test_11
-  - first:
-      213: 7263770034074671417
-    second: test_12
-  - first:
-      213: -6927681105904999893
-    second: test_13
-  - first:
-      213: 7138571786469096115
-    second: test_14
-  - first:
-      213: -475093430938194681
-    second: test_15
-  - first:
-      213: 1391216297064433223
-    second: test_16
-  - first:
-      213: -4597572132278421490
-    second: test_17
-  - first:
-      213: -2691992499507887826
-    second: test_18
-  - first:
-      213: 2414786378690274598
-    second: test_19
-  - first:
-      213: -6513472460415898119
-    second: test_20
-  - first:
-      213: -665310568874983147
-    second: test_21
-  - first:
-      213: 7192366350738159482
-    second: test_22
-  - first:
-      213: -308966482514396997
-    second: test_23
-  - first:
-      213: -8974561697742887058
-    second: test_24
-  - first:
-      213: 7126470675129946659
-    second: test_25
-  - first:
-      213: -6581557955092026329
-    second: test_26
-  - first:
-      213: 7216551506039650900
-    second: test_27
-  - first:
-      213: 8463158651601277009
-    second: test_28
-  - first:
-      213: -8314704838437245889
-    second: test_29
-  - first:
-      213: -2480591706540330323
-    second: test_30
-  - first:
-      213: -4602452031277678926
-    second: test_31
-  - first:
-      213: 3433902789800914089
-    second: test_32
-  - first:
-      213: -6978787669143652224
-    second: test_33
-  - first:
-      213: 4047825962551190848
-    second: test_34
-  - first:
-      213: -4012192923980219565
-    second: test_35
-  - first:
-      213: -4863148075069267187
-    second: test_36
-  - first:
-      213: -7190925326363344613
-    second: test_37
-  - first:
-      213: 5700165443213212434
-    second: test_38
-  - first:
-      213: -8064950743821231865
-    second: test_39
-  - first:
-      213: -5171303975730153078
-    second: test_40
-  - first:
-      213: -6994739742974329307
-    second: test_41
-  - first:
-      213: -1919000760441914041
-    second: test_42
-  - first:
-      213: -37429551405466973
-    second: test_43
-  - first:
-      213: -7026709922739420397
-    second: test_44
-  - first:
-      213: 4227018057532018656
-    second: test_45
-  - first:
-      213: 5752312236405579355
-    second: test_46
-  - first:
-      213: 4499470433880338087
-    second: test_47
-  - first:
-      213: 2682047906945450273
-    second: test_48
-  - first:
-      213: -1918343144907699511
-    second: test_49
-  - first:
-      213: 2635465702087526328
-    second: test_50
-  - first:
-      213: -4114855275408145107
-    second: test_51
-  - first:
-      213: -2315234025229365710
-    second: test_52
-  - first:
-      213: 1261125881212490610
-    second: test_53
-  - first:
-      213: -3134561664000000488
-    second: test_54
-  - first:
-      213: 8472693789694973055
-    second: test_55
-  - first:
-      213: -3670589575234677772
-    second: test_56
-  - first:
-      213: 7936394857995374015
-    second: test_57
-  - first:
-      213: 7491343110250946219
-    second: test_58
-  - first:
-      213: -2762248985547158299
-    second: test_59
-  - first:
-      213: 3922893332784293981
-    second: test_60
-  - first:
-      213: 7156833869938677991
-    second: test_61
-  - first:
-      213: -1776376625135760877
-    second: test_62
-  - first:
-      213: -1519412032872297082
-    second: test_63
-  - first:
-      213: 702726424989025840
-    second: test_64
-  - first:
-      213: -3718560977072686184
-    second: test_65
-  - first:
-      213: 2379738926063881308
-    second: test_66
-  - first:
-      213: -4918878800468538831
-    second: test_67
-  - first:
-      213: 8770524503132696942
-    second: test_68
-  - first:
-      213: 7184763109042652282
-    second: test_69
-  - first:
-      213: -3578727956860655881
-    second: test_70
-  - first:
-      213: 6065723886831923219
-    second: test_71
-  - first:
-      213: -5814162403609621321
-    second: test_72
+  internalIDToNameTable: []
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -240,7 +21,7 @@ TextureImporter:
     heightScale: 0.25
     normalMapFilter: 0
     flipGreenChannel: 0
-  isReadable: 0
+  isReadable: 1
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
@@ -269,7 +50,7 @@ TextureImporter:
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
-  spriteGenerateFallbackPhysicsShape: 1
+  spriteGenerateFallbackPhysicsShape: 0
   alphaUsage: 1
   alphaIsTransparency: 1
   spriteTessellationDetail: -1
@@ -291,7 +72,7 @@ TextureImporter:
     maxTextureSize: 16384
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0

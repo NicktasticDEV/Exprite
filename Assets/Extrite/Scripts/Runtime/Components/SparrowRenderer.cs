@@ -33,6 +33,13 @@ namespace Extrite
             StartCoroutine(PlayAnimation(animationName));
         }
 
+        [ContextMenu("Import Sparrow Animation Pack")]
+        public void ImportSparrowAnimationPack()
+        {
+            string path = Extrite.Utilities.GetPathFromDialogue("Import Sparrow Animation Pack", "esap", false);
+            sparrowAnimationPack = Extrite.Utilities.ImportSparrowAnimationPack(path);
+        }
+
         IEnumerator PlayAnimation(string animationName)
         {
             Animation animation = sparrowAnimationPack.GetAnimationByName(animationName);

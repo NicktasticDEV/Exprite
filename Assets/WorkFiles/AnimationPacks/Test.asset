@@ -12,23 +12,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a06fd32bd5fc04c678680467fd45138e, type: 3}
   m_Name: Test
   m_EditorClassIdentifier: 
-  sparrowFilePack:
-    texture: {fileID: 2800000, guid: 88616ad7aa63e4176b7f875b2960ccd2, type: 3}
-    atlas: {fileID: 4900000, guid: c34e5a168f38b480c97632404b767281, type: 3}
-  globalOffset: {x: -145.5, y: 218.7}
+  texture: {fileID: 2800000, guid: 4c4b2a0d4cbe04b41bfe9fa924b2870b, type: 3}
+  atlas: {fileID: 4900000, guid: 79372e81bee87427280a159964ffed53, type: 3}
+  globalOffset: {x: 0, y: 0}
   animations:
-  - name: idle
+  - name: Idle
     prefix: idle0
     fps: 24
     loop: 1
     offset: {x: 0, y: 0}
-  - name: wave
+  - name: Wave
     prefix: wave0
     fps: 24
     loop: 0
-    offset: {x: -7, y: 10}
-  - name: jump
+    offset: {x: 0, y: 0}
+  - name: Jump
     prefix: jump0
     fps: 24
     loop: 0
-    offset: {x: -20, y: 290}
+    offset: {x: 0, y: 0}

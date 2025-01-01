@@ -51,24 +51,33 @@ public class ExtriteEditorManager : MonoBehaviour
     public void LoadAnimationPack()
     {
         // If in UnityEditor, load the asset file from a path. Use relative path to project folder.
-        if (Application.isEditor)
+        #if UNITY_EDITOR
+        
+        string path = UnityEditor.EditorUtility.OpenFilePanel("Load Animation Pack", Application.dataPath, "asset");
+        if (path.Length != 0)
         {
-            string path = UnityEditor.EditorUtility.OpenFilePanel("Load Animation Pack", Application.dataPath, "asset");
-            if (path.Length != 0)
-            {
-                path = path.Replace(Application.dataPath, "Assets");
-                loadedSparrowAnimationPack = UnityEditor.AssetDatabase.LoadAssetAtPath<SO_SparrowAnimationPack>(path);
-                editingSparrowsAnimationPack = Instantiate(loadedSparrowAnimationPack);
-            }
-            UpdateAnimationList();
+            path = path.Replace(Application.dataPath, "Assets");
+            loadedSparrowAnimationPack = UnityEditor.AssetDatabase.LoadAssetAtPath<SO_SparrowAnimationPack>(path);
+            editingSparrowsAnimationPack = Instantiate(loadedSparrowAnimationPack);
         }
+        UpdateAnimationList();
+
+        #endif
+    }
+
+    public void LoadAnimationPackNew()
+    {
+        string path = Extrite.Utilities.GetPathFromDialogue("Load Animation Pack", "esap", false);
+
+        loadedSparrowAnimationPack = Extrite.Utilities.ImportSparrowAnimationPack(path);
+        editingSparrowsAnimationPack = Instantiate(loadedSparrowAnimationPack);
+        UpdateAnimationList();
     }
 
     // Save Animation Pack
     public void SaveAnimationPack()
     {
-        // If in UnityEditor, override the original asset file. Save with original path.
-
+        #if UNITY_EDITOR
         if (Application.isEditor)
         {
             Debug.Log("Saving Animation Pack");
@@ -87,28 +96,29 @@ public class ExtriteEditorManager : MonoBehaviour
                 SaveAnimationPackAs();
             }
         }
+        #endif
     }
 
     // Save Animation Pack As
     public void SaveAnimationPackAs()
     {
-        // If in UnityEditor, save the asset file to a new path.
-        if (Application.isEditor)
+        #if UNITY_EDITOR
+
+        string path = UnityEditor.EditorUtility.SaveFilePanelInProject("Save Animation Pack", "New Animation Pack", "asset", "Please enter a file name to save the animation pack to");
+        Debug.Log("Save Animation Pack As: " + path);
+        if (path.Length != 0)
         {
-            string path = UnityEditor.EditorUtility.SaveFilePanelInProject("Save Animation Pack", "New Animation Pack", "asset", "Please enter a file name to save the animation pack to");
-            Debug.Log("Save Animation Pack As: " + path);
-            if (path.Length != 0)
-            {
-                UnityEditor.AssetDatabase.CreateAsset(editingSparrowsAnimationPack, path);
-                UnityEditor.AssetDatabase.SaveAssets();
-                UnityEditor.AssetDatabase.Refresh();
+            UnityEditor.AssetDatabase.CreateAsset(editingSparrowsAnimationPack, path);
+            UnityEditor.AssetDatabase.SaveAssets();
+            UnityEditor.AssetDatabase.Refresh();
 
-                loadedSparrowAnimationPack = UnityEditor.AssetDatabase.LoadAssetAtPath<SO_SparrowAnimationPack>(path);
-                editingSparrowsAnimationPack = Instantiate(loadedSparrowAnimationPack);
+            loadedSparrowAnimationPack = UnityEditor.AssetDatabase.LoadAssetAtPath<SO_SparrowAnimationPack>(path);
+            editingSparrowsAnimationPack = Instantiate(loadedSparrowAnimationPack);
 
-                Debug.Log("Saved Animation Pack As");
-            }
+            Debug.Log("Saved Animation Pack As");
         }
+
+        #endif
     }
     #endregion
 
