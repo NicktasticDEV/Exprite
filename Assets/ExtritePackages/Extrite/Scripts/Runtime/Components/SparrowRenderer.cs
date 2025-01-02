@@ -3,6 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Xml.Serialization;
 
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
+
 namespace Extrite
 {
     [RequireComponent(typeof(SpriteRenderer))]
@@ -32,6 +36,21 @@ namespace Extrite
             if (preloadAnimationPack && sparrowAnimationPack != null)
             {
                 PreloadAnimationPack();
+            }
+        }
+
+        void Start()
+        {
+            #if UNITY_EDITOR
+            EditorApplication.playModeStateChanged += OnExitPlayMode;
+            #endif 
+        }
+
+        void OnExitPlayMode(PlayModeStateChange state)
+        {
+            if (state == PlayModeStateChange.ExitingPlayMode)
+            {
+                preloadedAnimations.Clear();
             }
         }
 
