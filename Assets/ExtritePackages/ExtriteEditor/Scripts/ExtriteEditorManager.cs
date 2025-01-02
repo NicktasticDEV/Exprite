@@ -3,6 +3,7 @@ using Extrite;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.EventSystems;
 
 public class ExtriteEditorManager : MonoBehaviour
 {
@@ -24,11 +25,14 @@ public class ExtriteEditorManager : MonoBehaviour
     public TMP_InputField prefixInputField;
     public TMP_InputField fpsInputField;
     public Toggle loopToggle;
+    public Toggle globalOffsetToggle;
+    public Toggle animOffsetToggle;
 
 
     [Header("Misc")]
     public bool currentlyWritingFile = false;
     private string externalWorkPath = "";
+    public int offsetIncrement = 1;
 
     void Awake()
     {
@@ -41,7 +45,29 @@ public class ExtriteEditorManager : MonoBehaviour
         ghostAnimationDropdown.onValueChanged.AddListener(ChangedSelectedGhostAnimation);
     }
 
-    
+    void Start()
+    {
+
+    }
+
+    void Update()
+    {
+        // If any of the arrow keys are pressed, call the KeyboardPress function
+        if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.RightArrow))
+        {
+            KeyboardPress();
+        }
+
+        // If shift is pressed, make the offset increment 5
+        if (Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.RightShift))
+        {
+            offsetIncrement = 5;
+        }
+        else if (Input.GetKeyUp(KeyCode.LeftShift) || Input.GetKeyUp(KeyCode.RightShift))
+        {
+            offsetIncrement = 1;
+        }
+    }
 
     #region Animation Pack File Management
     // New Animation Pack
@@ -122,6 +148,7 @@ public class ExtriteEditorManager : MonoBehaviour
         {
             // Transfer the data from the editing animation pack to the loaded animation pack and save it
             loadedSparrowAnimationPack.animations = editingSparrowsAnimationPack.animations;
+            loadedSparrowAnimationPack.globalOffset = editingSparrowsAnimationPack.globalOffset;
             UnityEditor.EditorUtility.SetDirty(loadedSparrowAnimationPack);
             UnityEditor.AssetDatabase.SaveAssets();
             UnityEditor.AssetDatabase.Refresh();
@@ -270,4 +297,52 @@ public class ExtriteEditorManager : MonoBehaviour
         ghostAnimationDropdown.value = -1;
     }
     
+    void KeyboardPress()
+    {
+        if (globalOffsetToggle.isOn)
+        {
+            if (Input.GetKeyDown(KeyCode.UpArrow))
+            {
+                mainSparrowRenderer.sparrowAnimationPack.globalOffset.y += offsetIncrement;
+            }
+            else if (Input.GetKeyDown(KeyCode.DownArrow))
+            {
+                mainSparrowRenderer.sparrowAnimationPack.globalOffset.y -= offsetIncrement;
+            }
+            else if (Input.GetKeyDown(KeyCode.LeftArrow))
+            {
+                mainSparrowRenderer.sparrowAnimationPack.globalOffset.x -= offsetIncrement;
+            }
+            else if (Input.GetKeyDown(KeyCode.RightArrow))
+            {
+                mainSparrowRenderer.sparrowAnimationPack.globalOffset.x += offsetIncrement;
+            }
+            // Play the animation again to update the position with the current selected animation in the UI
+            mainSparrowRenderer.Play(animationDropdown.options[animationDropdown.value].text);
+        }
+        else if (animOffsetToggle.isOn)
+        {
+            if (Input.GetKeyDown(KeyCode.UpArrow))
+            {
+                mainSparrowRenderer.sparrowAnimationPack.animations[animationDropdown.value].offset.y += offsetIncrement;
+            }
+            else if (Input.GetKeyDown(KeyCode.DownArrow))
+            {
+                mainSparrowRenderer.sparrowAnimationPack.animations[animationDropdown.value].offset.y -= offsetIncrement;
+            }
+            else if (Input.GetKeyDown(KeyCode.LeftArrow))
+            {
+                mainSparrowRenderer.sparrowAnimationPack.animations[animationDropdown.value].offset.x -= offsetIncrement;
+            }
+            else if (Input.GetKeyDown(KeyCode.RightArrow))
+            {
+                mainSparrowRenderer.sparrowAnimationPack.animations[animationDropdown.value].offset.x += offsetIncrement;
+            }
+            // Play the animation again to update the position with the current selected animation in the UI
+            mainSparrowRenderer.Play(animationDropdown.options[animationDropdown.value].text);
+        }
+
+
+    }
+
 }

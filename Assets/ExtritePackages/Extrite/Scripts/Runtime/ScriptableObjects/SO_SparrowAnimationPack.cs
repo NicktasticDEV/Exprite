@@ -51,11 +51,13 @@ public class SO_SparrowAnimationPack : ScriptableObject
         return subTextures.ToArray();
     }
 
+    #if UNITY_EDITOR
     [ContextMenu("Export Animation Pack")]
     public void ExportAnimationPack()
     {
         string path = UnityEditor.EditorUtility.SaveFilePanel("Save Animation Pack", "", "animationPack", "esac");
         Extrite.Utilities.ExportSparrowAnimationPack(this, path);
     }
+    #endif
 
 }
