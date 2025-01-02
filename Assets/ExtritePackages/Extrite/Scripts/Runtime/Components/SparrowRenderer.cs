@@ -12,7 +12,7 @@ namespace Extrite
         public bool isPlaying { get; private set; }
         public Animation? currentAnimation { get; private set; }
 
-        public List<PreloadAnimData> preloadedAnimationsData;
+        private static Dictionary<SO_SparrowAnimationPack, Dictionary<string, List<Sprite>>> preloadedAnimations = new Dictionary<SO_SparrowAnimationPack, Dictionary<string, List<Sprite>>>();
 
         // Components
         private SpriteRenderer spriteRenderer;
@@ -26,6 +26,8 @@ namespace Extrite
         void Awake()
         {
             spriteRenderer = GetComponent<SpriteRenderer>();
+
+            previousSparrowAnimationPack = sparrowAnimationPack;
 
             if (preloadAnimationPack && sparrowAnimationPack != null)
             {
@@ -63,17 +65,6 @@ namespace Extrite
         {
             Animation animation = sparrowAnimationPack.GetAnimationByName(animationName);
 
-            PreloadAnimData preloadAnimData;
-
-            if (preloadAnimationPack)
-            {
-                preloadAnimData = GetPreloadAnimDataByName(animationName);
-            }
-            else
-            {
-                preloadAnimData = null;
-            }
-
             isPlaying = true;
             currentAnimation = animation;
 
@@ -110,7 +101,7 @@ namespace Extrite
                     }
                     else
                     {
-                        spriteRenderer.sprite = preloadAnimData.sprites[frameIndex];
+                        spriteRenderer.sprite = preloadedAnimations[sparrowAnimationPack][animationName][frameIndex];
                     }
 
                     frameIndex++;
@@ -145,50 +136,48 @@ namespace Extrite
             }
         }
 
-        PreloadAnimData GetPreloadAnimDataByName(string animationName)
-        {
-            foreach (PreloadAnimData preloadAnimData in preloadedAnimationsData)
-            {
-                if (preloadAnimData.name == animationName)
-                {
-                    return preloadAnimData;
-                }
-            }
-
-            throw new System.Exception("Preload Animation Data not found: " + animationName);
-        }
-
         void PreloadAnimationPack()
         {
             Debug.Log("Preloading Animation Pack");
-            preloadedAnimationsData = new List<PreloadAnimData>();
 
-            foreach (Animation animation in sparrowAnimationPack.animations)
+            if (!preloadedAnimations.ContainsKey(sparrowAnimationPack))
             {
-                PreloadAnimData preloadAnimData = new PreloadAnimData();
-                preloadAnimData.name = animation.name;
-                preloadAnimData.sprites = new List<Sprite>();
+                Dictionary<string, List<Sprite>> animations = new Dictionary<string, List<Sprite>>();
 
-                foreach (SubTexture subTexture in sparrowAnimationPack.GetSubTexturesFromAnimation(animation))
+                foreach (Animation animation in sparrowAnimationPack.animations)
                 {
-                    float adjustedY = sparrowAnimationPack.texture.height - subTexture.y - subTexture.height;
+                    List<Sprite> sprites = new List<Sprite>();
 
-                    Vector2 pivot = new Vector2(
-                        (subTexture.frameX - animation.offset.x - sparrowAnimationPack.globalOffset.x) / subTexture.width,
-                        1f - ((subTexture.frameY + animation.offset.y + sparrowAnimationPack.globalOffset.y) / subTexture.height)
-                    );
+                    SubTexture[] subTextures = sparrowAnimationPack.GetSubTexturesFromAnimation(animation);
 
-                    Sprite sprite = Sprite.Create(
-                        sparrowAnimationPack.texture,
-                        new Rect(subTexture.x, adjustedY, subTexture.width, subTexture.height),
-                        pivot
-                    );
+                    foreach (SubTexture subTexture in subTextures)
+                    {
+                        float adjustedY = sparrowAnimationPack.texture.height - subTexture.y - subTexture.height;
 
-                    preloadAnimData.sprites.Add(sprite);
+                        Vector2 pivot = new Vector2(
+                            (subTexture.frameX - animation.offset.x - sparrowAnimationPack.globalOffset.x) / subTexture.width,
+                            1f - ((subTexture.frameY + animation.offset.y + sparrowAnimationPack.globalOffset.y) / subTexture.height)
+                        );
+
+                        Sprite sprite = Sprite.Create(
+                            sparrowAnimationPack.texture,
+                            new Rect(subTexture.x, adjustedY, subTexture.width, subTexture.height),
+                            pivot
+                        );
+
+                        sprites.Add(sprite);
+                    }
+
+                    animations.Add(animation.name, sprites);
                 }
 
-                preloadedAnimationsData.Add(preloadAnimData);
+                preloadedAnimations.Add(sparrowAnimationPack, animations);
             }
+            else
+            {
+                Debug.Log("Animation Pack already preloaded");
+            }
+            
         }
     
     }

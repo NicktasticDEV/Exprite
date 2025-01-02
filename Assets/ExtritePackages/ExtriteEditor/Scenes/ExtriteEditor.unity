@@ -771,6 +771,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   preloadAnimationPack: 0
+  sparrowAnimationPack: {fileID: 0}
 --- !u!1 &231551123
 GameObject:
   m_ObjectHideFlags: 0
@@ -1172,6 +1173,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   preloadAnimationPack: 0
+  sparrowAnimationPack: {fileID: 0}
 --- !u!1 &261280769
 GameObject:
   m_ObjectHideFlags: 0
