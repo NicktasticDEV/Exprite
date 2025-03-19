@@ -16,46 +16,39 @@ namespace Extrite
         public bool isPlaying { get; private set; }
         public Animation? currentAnimation { get; private set; }
 
-        private static Dictionary<SO_SparrowAnimationPack, Dictionary<string, List<Sprite>>> preloadedAnimations = new Dictionary<SO_SparrowAnimationPack, Dictionary<string, List<Sprite>>>();
-
         // Components
         private SpriteRenderer spriteRenderer;
+        public SO_SparrowAnimationPack sparrowAnimationPack;
 
         // Fields
         public bool preloadAnimationPack = false;
 
+        // Private Fields
         private SO_SparrowAnimationPack previousSparrowAnimationPack;
-        public SO_SparrowAnimationPack sparrowAnimationPack;
+        private static Dictionary<SO_SparrowAnimationPack, Dictionary<string, List<Sprite>>> preloadedAnimations = new Dictionary<SO_SparrowAnimationPack, Dictionary<string, List<Sprite>>>();
 
         void Awake()
         {
+            // Get Components
             spriteRenderer = GetComponent<SpriteRenderer>();
 
+            // Set Variables
             previousSparrowAnimationPack = sparrowAnimationPack;
 
+            // Preload Animation Pack
             if (preloadAnimationPack && sparrowAnimationPack != null)
             {
                 PreloadAnimationPack();
             }
-        }
 
-        void Start()
-        {
             #if UNITY_EDITOR
             EditorApplication.playModeStateChanged += OnExitPlayMode;
             #endif 
         }
 
-        void OnExitPlayMode(PlayModeStateChange state)
-        {
-            if (state == PlayModeStateChange.ExitingPlayMode)
-            {
-                preloadedAnimations.Clear();
-            }
-        }
-
         void Update()
         {
+            // Check if the animation pack has changed
             if (previousSparrowAnimationPack != sparrowAnimationPack && sparrowAnimationPack != null)
             {
                 OnSparrowAnimationPackChanged();
@@ -71,13 +64,6 @@ namespace Extrite
             }
 
             StartCoroutine(PlayAnimation(animationName));
-        }
-
-        [ContextMenu("Import Sparrow Animation Pack")]
-        public void ImportSparrowAnimationPack()
-        {
-            string path = Extrite.Utilities.GetPathFromDialogue("Import Sparrow Animation Pack", "esap", false);
-            sparrowAnimationPack = Extrite.Utilities.ImportSparrowAnimationPack(path);
         }
 
         IEnumerator PlayAnimation(string animationName)
@@ -155,10 +141,18 @@ namespace Extrite
             }
         }
 
+        #if UNITY_EDITOR
+        void OnExitPlayMode(PlayModeStateChange state)
+        {
+            if (state == PlayModeStateChange.ExitingPlayMode)
+            {
+                preloadedAnimations.Clear();
+            }
+        }
+        #endif
+
         void PreloadAnimationPack()
         {
-            Debug.Log("Preloading Animation Pack");
-
             if (!preloadedAnimations.ContainsKey(sparrowAnimationPack))
             {
                 Dictionary<string, List<Sprite>> animations = new Dictionary<string, List<Sprite>>();

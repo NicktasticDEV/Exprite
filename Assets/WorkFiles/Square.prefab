@@ -101,8 +101,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 906e7409039a644f9b688453a34c48df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  preloadAnimationPack: 1
   sparrowAnimationPack: {fileID: 11400000, guid: 7a3aa1b3ce34346539979aad3c25c089, type: 2}
+  preloadAnimationPack: 1
 --- !u!114 &7764436162078804762
 MonoBehaviour:
   m_ObjectHideFlags: 0
