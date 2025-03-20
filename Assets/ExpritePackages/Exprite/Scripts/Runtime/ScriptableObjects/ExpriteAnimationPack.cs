@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using System.Xml.Serialization;
-using Extrite;
+using Exprite;
 using System;
 using System.IO;
 using System.Text;
@@ -16,13 +16,13 @@ public class ExpriteAnimationPack : ScriptableObject
     public TextAsset atlas;
 
     public Vector2 globalOffset;
-    public Extrite.AnimationDefinition[] animations;
+    public Exprite.AnimationDefinition[] animations;
 
     XmlSerializer serializer = new XmlSerializer(typeof(TextureAtlas));
 
-    public Extrite.AnimationDefinition GetAnimationByName(string animationName)
+    public Exprite.AnimationDefinition GetAnimationByName(string animationName)
     {
-        foreach (Extrite.AnimationDefinition animation in animations)
+        foreach (Exprite.AnimationDefinition animation in animations)
         {
             if (animation.name == animationName)
             {
@@ -33,7 +33,7 @@ public class ExpriteAnimationPack : ScriptableObject
         throw new Exception("Animation not found: " + animationName);
     }
 
-    public SubTexture[] GetSubTexturesFromAnimation(Extrite.AnimationDefinition animation)
+    public SubTexture[] GetSubTexturesFromAnimation(Exprite.AnimationDefinition animation)
     {
         TextureAtlas textureAtlas = (TextureAtlas)serializer.Deserialize(new System.IO.StringReader(atlas.text));
 
@@ -56,7 +56,7 @@ public class ExpriteAnimationPack : ScriptableObject
     public void ExportAnimationPack()
     {
         string path = UnityEditor.EditorUtility.SaveFilePanel("Save Animation Pack", "", "animationPack", "esac");
-        Extrite.Utilities.ExportSparrowAnimationPack(this, path);
+        Exprite.Utilities.ExportSparrowAnimationPack(this, path);
     }
     #endif
 

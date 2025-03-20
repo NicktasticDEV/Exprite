@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-namespace Extrite
+namespace Exprite
 {
     [System.Serializable]
     public struct AnimationDefinition

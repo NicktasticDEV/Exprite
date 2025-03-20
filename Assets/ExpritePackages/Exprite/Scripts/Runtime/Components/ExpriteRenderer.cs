@@ -7,10 +7,10 @@ using System.Xml.Serialization;
 using UnityEditor;
 #endif
 
-namespace Extrite
+namespace Exprite
 {
     [RequireComponent(typeof(SpriteRenderer))]
-    public class SparrowRenderer : MonoBehaviour
+    public class ExpriteRenderer : MonoBehaviour
     {
         // Public Variables
         public bool isPlaying { get; private set; }

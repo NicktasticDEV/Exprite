@@ -2,7 +2,7 @@ using System;
 using System.Xml.Serialization;
 using System.Collections.Generic;
 
-namespace Extrite
+namespace Exprite
 {
     [XmlRoot(ElementName="SubTexture")]
     public class SubTexture { 

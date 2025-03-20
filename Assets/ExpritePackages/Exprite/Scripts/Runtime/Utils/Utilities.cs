@@ -2,14 +2,14 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using System.Xml.Serialization;
-using Extrite;
+using Exprite;
 using System;
 using System.IO;
 using System.Text;
 using System.IO.Compression;
 
 
-namespace Extrite
+namespace Exprite
 {
     public class Utilities : MonoBehaviour
     {
@@ -61,7 +61,7 @@ namespace Extrite
                             writer.Write(sparrowAnimationPack.animations.Length);
 
                             // Write Animations
-                            foreach (Extrite.AnimationDefinition animation in sparrowAnimationPack.animations)
+                            foreach (Exprite.AnimationDefinition animation in sparrowAnimationPack.animations)
                             {
                                 writer.Write(animation.name.Length);
                                 writer.Write(Encoding.UTF8.GetBytes(animation.name));
@@ -137,10 +137,10 @@ namespace Extrite
                             int animationCount = reader.ReadInt32();
 
                             // Read Animations
-                            sparrowAnimationPack.animations = new Extrite.AnimationDefinition[animationCount];
+                            sparrowAnimationPack.animations = new Exprite.AnimationDefinition[animationCount];
                             for (int i = 0; i < animationCount; i++)
                             {
-                                Extrite.AnimationDefinition animation = new Extrite.AnimationDefinition();
+                                Exprite.AnimationDefinition animation = new Exprite.AnimationDefinition();
                                 animation.name = Encoding.UTF8.GetString(reader.ReadBytes(reader.ReadInt32()));
                                 animation.prefix = Encoding.UTF8.GetString(reader.ReadBytes(reader.ReadInt32()));
                                 animation.fps = reader.ReadInt32();

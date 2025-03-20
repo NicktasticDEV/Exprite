@@ -7,28 +7,28 @@ using System;
 using System.IO;
 using System.Text;
 using System.IO.Compression;
-using Extrite;
+using Exprite;
 
-public class ExtriteWindow : EditorWindow
+public class ExpriteWindow : EditorWindow
 {
-    [MenuItem("Extrite/Extrite Window")]
+    [MenuItem("Exprite/Exprite Window")]
     public static void ShowWindow()
     {
-        GetWindow<ExtriteWindow>("Extrite Window");
+        GetWindow<ExpriteWindow>("Exprite Window");
     }
 
     void OnGUI()
     {
-        GUILayout.Label("Extrite Window", EditorStyles.boldLabel);
+        GUILayout.Label("Exprite Window", EditorStyles.boldLabel);
 
         // Import Sparrow Animation Pack
-        if (GUILayout.Button("Import Sparrow Animation Pack"))
+        if (GUILayout.Button("Import Exprite Animation Pack"))
         {
             importAnimationPack();
         }
 
         // Export Sparrow Animation Pack
-        if (GUILayout.Button("Export Sparrow Animation Pack"))
+        if (GUILayout.Button("Export Exprite Animation Pack"))
         {
             exportAnimationPack();
         }
@@ -36,17 +36,17 @@ public class ExtriteWindow : EditorWindow
 
     void importAnimationPack()
     {
-        Debug.Log("Importing Animation Pack");
+        Debug.Log("Importing Exprite Animation Pack");
 
         ExpriteAnimationPack sparrowAnimationPack = ScriptableObject.CreateInstance<ExpriteAnimationPack>();
 
-        string sparrowAnimationPackPath = Extrite.Utilities.GetPathFromDialogue("Import Sparrow Animation Pack", "esap", false);
+        string sparrowAnimationPackPath = Exprite.Utilities.GetPathFromDialogue("Import Exprite Animation Pack", "esap", false);
 
-        sparrowAnimationPack = Extrite.Utilities.ImportSparrowAnimationPack(sparrowAnimationPackPath);
+        sparrowAnimationPack = Exprite.Utilities.ImportSparrowAnimationPack(sparrowAnimationPackPath);
         
         // Get texture and atlas from the animation pack
-        Texture2D texture = Extrite.Utilities.GetTextureFromAnimationPack(sparrowAnimationPackPath);
-        TextAsset atlas = Extrite.Utilities.GetTextAssetFromAnimationPack(sparrowAnimationPackPath);
+        Texture2D texture = Exprite.Utilities.GetTextureFromAnimationPack(sparrowAnimationPackPath);
+        TextAsset atlas = Exprite.Utilities.GetTextAssetFromAnimationPack(sparrowAnimationPackPath);
 
         // Save the animation pack to the project (Make sure path is relative to the project folder) Use editor utility to save the file
         string path = EditorUtility.SaveFilePanel("Save Animation Pack", Application.dataPath, "New Animation Pack", "asset");
@@ -67,16 +67,16 @@ public class ExtriteWindow : EditorWindow
             AssetDatabase.Refresh();
         }
 
-        Debug.Log("Imported Animation Pack");
+        Debug.Log("Imported Exprite Animation Pack");
     }
 
     void exportAnimationPack()
     {
-        string animationPackPath = Extrite.Utilities.GetPathFromDialogue("Export Sparrow Animation Pack", "asset", false);
+        string animationPackPath = Exprite.Utilities.GetPathFromDialogue("Export Exprite Animation Pack", "asset", false);
 
         if (animationPackPath.Length != 0)
         {
-            Debug.Log("Selected Animation Pack: " + animationPackPath);
+            Debug.Log("Selected Exprite Animation Pack: " + animationPackPath);
         }
         else
         {
@@ -85,9 +85,9 @@ public class ExtriteWindow : EditorWindow
         
         ExpriteAnimationPack sparrowAnimationPack = AssetDatabase.LoadAssetAtPath<ExpriteAnimationPack>(animationPackPath);
 
-        string exportPath = EditorUtility.SaveFilePanel("Export Animation Pack", "", "animationPack", "esap");
-        Extrite.Utilities.ExportSparrowAnimationPack(sparrowAnimationPack, exportPath);
+        string exportPath = EditorUtility.SaveFilePanel("Export Exprite Animation Pack", "", "animationPack", "esap");
+        Exprite.Utilities.ExportSparrowAnimationPack(sparrowAnimationPack, exportPath);
 
-        Debug.Log("Exported Animation Pack");
+        Debug.Log("Exported Exprite Animation Pack");
     }
 }

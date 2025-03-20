@@ -1,14 +1,14 @@
-using Extrite;
+using Exprite;
 using UnityEngine;
 
 public class TestPlayer : MonoBehaviour
 {
-    public SparrowRenderer sparrowRenderer;
+    public ExpriteRenderer sparrowRenderer;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
-        sparrowRenderer = GetComponent<SparrowRenderer>();
+        sparrowRenderer = GetComponent<ExpriteRenderer>();
     }
 
     void Start()
