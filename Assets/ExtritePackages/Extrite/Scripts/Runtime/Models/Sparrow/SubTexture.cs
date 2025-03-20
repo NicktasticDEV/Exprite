@@ -36,15 +36,5 @@ namespace Extrite
         [XmlAttribute(AttributeName="frameHeight")] 
         public int frameHeight { get; set; } 
     }
-
-    [XmlRoot(ElementName="TextureAtlas")]
-    public class TextureAtlas { 
-
-        [XmlElement(ElementName="SubTexture")] 
-        public List<SubTexture> SubTexture { get; set; } 
-
-        [XmlAttribute(AttributeName="imagePath")] 
-        public string imagePath { get; set; } 
-    }
 }
 

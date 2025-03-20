@@ -14,18 +14,18 @@ namespace Extrite
     {
         // Public Variables
         public bool isPlaying { get; private set; }
-        public Animation? currentAnimation { get; private set; }
+        public AnimationDefinition? currentAnimation { get; private set; }
 
         // Components
         private SpriteRenderer spriteRenderer;
-        public SO_SparrowAnimationPack sparrowAnimationPack;
+        public ExpriteAnimationPack sparrowAnimationPack;
 
         // Fields
         public bool preloadAnimationPack = false;
 
         // Private Fields
-        private SO_SparrowAnimationPack previousSparrowAnimationPack;
-        private static Dictionary<SO_SparrowAnimationPack, Dictionary<string, List<Sprite>>> preloadedAnimations = new Dictionary<SO_SparrowAnimationPack, Dictionary<string, List<Sprite>>>();
+        private ExpriteAnimationPack previousSparrowAnimationPack;
+        private static Dictionary<ExpriteAnimationPack, Dictionary<string, List<Sprite>>> preloadedAnimations = new Dictionary<ExpriteAnimationPack, Dictionary<string, List<Sprite>>>();
 
         void Awake()
         {
@@ -68,7 +68,7 @@ namespace Extrite
 
         IEnumerator PlayAnimation(string animationName)
         {
-            Animation animation = sparrowAnimationPack.GetAnimationByName(animationName);
+            AnimationDefinition animation = sparrowAnimationPack.GetAnimationByName(animationName);
 
             isPlaying = true;
             currentAnimation = animation;
@@ -157,7 +157,7 @@ namespace Extrite
             {
                 Dictionary<string, List<Sprite>> animations = new Dictionary<string, List<Sprite>>();
 
-                foreach (Animation animation in sparrowAnimationPack.animations)
+                foreach (AnimationDefinition animation in sparrowAnimationPack.animations)
                 {
                     List<Sprite> sprites = new List<Sprite>();
 

@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Extrite
 {
     [System.Serializable]
-    public struct Animation
+    public struct AnimationDefinition
     {
         // Stuff in JSON
         public string name;

@@ -38,7 +38,7 @@ public class ExtriteWindow : EditorWindow
     {
         Debug.Log("Importing Animation Pack");
 
-        SO_SparrowAnimationPack sparrowAnimationPack = ScriptableObject.CreateInstance<SO_SparrowAnimationPack>();
+        ExpriteAnimationPack sparrowAnimationPack = ScriptableObject.CreateInstance<ExpriteAnimationPack>();
 
         string sparrowAnimationPackPath = Extrite.Utilities.GetPathFromDialogue("Import Sparrow Animation Pack", "esap", false);
 
@@ -83,7 +83,7 @@ public class ExtriteWindow : EditorWindow
             return;
         }
         
-        SO_SparrowAnimationPack sparrowAnimationPack = AssetDatabase.LoadAssetAtPath<SO_SparrowAnimationPack>(animationPackPath);
+        ExpriteAnimationPack sparrowAnimationPack = AssetDatabase.LoadAssetAtPath<ExpriteAnimationPack>(animationPackPath);
 
         string exportPath = EditorUtility.SaveFilePanel("Export Animation Pack", "", "animationPack", "esap");
         Extrite.Utilities.ExportSparrowAnimationPack(sparrowAnimationPack, exportPath);

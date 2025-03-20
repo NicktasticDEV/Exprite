@@ -13,7 +13,7 @@ namespace Extrite
 {
     public class Utilities : MonoBehaviour
     {
-        public static void ExportSparrowAnimationPack(SO_SparrowAnimationPack sparrowAnimationPack, string path)
+        public static void ExportSparrowAnimationPack(ExpriteAnimationPack sparrowAnimationPack, string path)
         {
             if (path.Length == 0)
             {
@@ -61,7 +61,7 @@ namespace Extrite
                             writer.Write(sparrowAnimationPack.animations.Length);
 
                             // Write Animations
-                            foreach (Extrite.Animation animation in sparrowAnimationPack.animations)
+                            foreach (Extrite.AnimationDefinition animation in sparrowAnimationPack.animations)
                             {
                                 writer.Write(animation.name.Length);
                                 writer.Write(Encoding.UTF8.GetBytes(animation.name));
@@ -80,14 +80,14 @@ namespace Extrite
             }   
         }
     
-        public static SO_SparrowAnimationPack ImportSparrowAnimationPack(string path)
+        public static ExpriteAnimationPack ImportSparrowAnimationPack(string path)
         {
             if (path.Length == 0)
             {
                 return null;
             }
 
-            SO_SparrowAnimationPack sparrowAnimationPack = ScriptableObject.CreateInstance<SO_SparrowAnimationPack>();
+            ExpriteAnimationPack sparrowAnimationPack = ScriptableObject.CreateInstance<ExpriteAnimationPack>();
 
             using (FileStream fileStream = new FileStream(path, FileMode.Open))
             {
@@ -137,10 +137,10 @@ namespace Extrite
                             int animationCount = reader.ReadInt32();
 
                             // Read Animations
-                            sparrowAnimationPack.animations = new Extrite.Animation[animationCount];
+                            sparrowAnimationPack.animations = new Extrite.AnimationDefinition[animationCount];
                             for (int i = 0; i < animationCount; i++)
                             {
-                                Extrite.Animation animation = new Extrite.Animation();
+                                Extrite.AnimationDefinition animation = new Extrite.AnimationDefinition();
                                 animation.name = Encoding.UTF8.GetString(reader.ReadBytes(reader.ReadInt32()));
                                 animation.prefix = Encoding.UTF8.GetString(reader.ReadBytes(reader.ReadInt32()));
                                 animation.fps = reader.ReadInt32();

@@ -8,21 +8,21 @@ using System.IO;
 using System.Text;
 using System.IO.Compression;
 
-[CreateAssetMenu(fileName = "SparrowAnimationPack", menuName = "Extrite/Sparrow Animation Pack", order = 1)]
-public class SO_SparrowAnimationPack : ScriptableObject
+[CreateAssetMenu(fileName = "ExpriteAnimationPack", menuName = "Exprite/Exprite Animation Pack", order = 1)]
+public class ExpriteAnimationPack : ScriptableObject
 {
 
     public Texture2D texture;
     public TextAsset atlas;
 
     public Vector2 globalOffset;
-    public Extrite.Animation[] animations;
+    public Extrite.AnimationDefinition[] animations;
 
     XmlSerializer serializer = new XmlSerializer(typeof(TextureAtlas));
 
-    public Extrite.Animation GetAnimationByName(string animationName)
+    public Extrite.AnimationDefinition GetAnimationByName(string animationName)
     {
-        foreach (Extrite.Animation animation in animations)
+        foreach (Extrite.AnimationDefinition animation in animations)
         {
             if (animation.name == animationName)
             {
@@ -33,7 +33,7 @@ public class SO_SparrowAnimationPack : ScriptableObject
         throw new Exception("Animation not found: " + animationName);
     }
 
-    public SubTexture[] GetSubTexturesFromAnimation(Extrite.Animation animation)
+    public SubTexture[] GetSubTexturesFromAnimation(Extrite.AnimationDefinition animation)
     {
         TextureAtlas textureAtlas = (TextureAtlas)serializer.Deserialize(new System.IO.StringReader(atlas.text));
 
