@@ -7,7 +7,6 @@ namespace Exprite
     [System.Serializable]
     public struct AnimationDefinition
     {
-        // Stuff in JSON
         public string name;
         public string prefix;
         public int fps;
