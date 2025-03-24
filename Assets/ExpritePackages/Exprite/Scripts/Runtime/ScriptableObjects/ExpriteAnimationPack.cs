@@ -1,28 +1,28 @@
 using UnityEngine;
-using System.Collections;
 using System.Collections.Generic;
 using System.Xml.Serialization;
 using Exprite;
 using System;
-using System.IO;
-using System.Text;
-using System.IO.Compression;
 
 [CreateAssetMenu(fileName = "ExpriteAnimationPack", menuName = "Exprite/Exprite Animation Pack", order = 1)]
 public class ExpriteAnimationPack : ScriptableObject
 {
-
+    // Public fields
     public Texture2D texture;
     public TextAsset atlas;
-
     public Vector2 globalOffset;
-    public Exprite.AnimationDefinition[] animations;
+    public AnimationDefinition[] animations;
 
+    // Private fields
     XmlSerializer serializer = new XmlSerializer(typeof(TextureAtlas));
 
-    public Exprite.AnimationDefinition GetAnimationByName(string animationName)
+    // Functions
+    /// <summary> Retrieves an animation definition by its name. </summary>
+    /// <param name="animationName">The name of the animation to retrieve.</param>
+    /// <returns>The animation definition with the specified name.</returns>
+    public AnimationDefinition GetAnimationByName(string animationName)
     {
-        foreach (Exprite.AnimationDefinition animation in animations)
+        foreach (AnimationDefinition animation in animations)
         {
             if (animation.name == animationName)
             {
@@ -33,7 +33,10 @@ public class ExpriteAnimationPack : ScriptableObject
         throw new Exception("Animation not found: " + animationName);
     }
 
-    public SubTexture[] GetSubTexturesFromAnimation(Exprite.AnimationDefinition animation)
+    /// <summary> Retrieves all SubTexture data from an animation. </summary>
+    /// <param name="animation">The name of the animation to retrieve.</param>
+    /// <returns>The animation definition with the specified name.</returns>
+    public SubTexture[] GetSubTexturesFromAnimation(AnimationDefinition animation)
     {
         TextureAtlas textureAtlas = (TextureAtlas)serializer.Deserialize(new System.IO.StringReader(atlas.text));
 
@@ -50,14 +53,4 @@ public class ExpriteAnimationPack : ScriptableObject
 
         return subTextures.ToArray();
     }
-
-    #if UNITY_EDITOR
-    [ContextMenu("Export Animation Pack")]
-    public void ExportAnimationPack()
-    {
-        string path = UnityEditor.EditorUtility.SaveFilePanel("Save Animation Pack", "", "animationPack", "esac");
-        Exprite.Utilities.ExportSparrowAnimationPack(this, path);
-    }
-    #endif
-
 }
