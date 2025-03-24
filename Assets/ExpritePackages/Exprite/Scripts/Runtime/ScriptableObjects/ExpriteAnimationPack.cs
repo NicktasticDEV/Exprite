@@ -20,7 +20,7 @@ public class ExpriteAnimationPack : ScriptableObject
     /// <summary> Retrieves an animation definition by its name. </summary>
     /// <param name="animationName">The name of the animation to retrieve.</param>
     /// <returns>The animation definition with the specified name.</returns>
-    public AnimationDefinition GetAnimationByName(string animationName)
+    public AnimationDefinition GetAnimationDefinitionByName(string animationName)
     {
         foreach (AnimationDefinition animation in animations)
         {
@@ -36,7 +36,7 @@ public class ExpriteAnimationPack : ScriptableObject
     /// <summary> Retrieves all SubTexture data from an animation. </summary>
     /// <param name="animation">The name of the animation to retrieve.</param>
     /// <returns>The animation definition with the specified name.</returns>
-    public SubTexture[] GetSubTexturesFromAnimation(AnimationDefinition animation)
+    public SubTexture[] GetSubTexturesFromAnimationDefinition(AnimationDefinition animation)
     {
         TextureAtlas textureAtlas = (TextureAtlas)serializer.Deserialize(new System.IO.StringReader(atlas.text));
 

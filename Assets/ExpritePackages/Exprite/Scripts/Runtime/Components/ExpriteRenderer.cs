@@ -12,20 +12,22 @@ namespace Exprite
     [RequireComponent(typeof(SpriteRenderer))]
     public class ExpriteRenderer : MonoBehaviour
     {
-        // Public Variables
-        public bool isPlaying { get; private set; }
-        public AnimationDefinition? currentAnimation { get; private set; }
-
-        // Components
-        private SpriteRenderer spriteRenderer;
+        // Properties
         public ExpriteAnimationPack sparrowAnimationPack;
-
-        // Fields
         public bool preloadAnimationPack = false;
 
-        // Private Fields
-        private ExpriteAnimationPack previousSparrowAnimationPack;
+        // Constants
+
+        // Static fields
         private static Dictionary<ExpriteAnimationPack, Dictionary<string, List<Sprite>>> preloadedAnimations = new Dictionary<ExpriteAnimationPack, Dictionary<string, List<Sprite>>>();
+
+        // Private fields
+        private SpriteRenderer spriteRenderer;
+        private ExpriteAnimationPack previousSparrowAnimationPack;
+
+        // Public fields
+        public AnimationDefinition? currentAnimation { get; private set; }
+        public bool isPlaying { get; private set; }
 
         void Awake()
         {
@@ -68,7 +70,7 @@ namespace Exprite
 
         IEnumerator PlayAnimation(string animationName)
         {
-            AnimationDefinition animation = sparrowAnimationPack.GetAnimationByName(animationName);
+            AnimationDefinition animation = sparrowAnimationPack.GetAnimationDefinitionByName(animationName);
 
             isPlaying = true;
             currentAnimation = animation;
@@ -77,7 +79,7 @@ namespace Exprite
             float timePerFrame = 1f / animation.fps;
             float timeAccumulator = 0f;
 
-            SubTexture[] subTextures = sparrowAnimationPack.GetSubTexturesFromAnimation(animation);
+            SubTexture[] subTextures = sparrowAnimationPack.GetSubTexturesFromAnimationDefinition(animation);
 
             while (true)
             {
@@ -161,7 +163,7 @@ namespace Exprite
                 {
                     List<Sprite> sprites = new List<Sprite>();
 
-                    SubTexture[] subTextures = sparrowAnimationPack.GetSubTexturesFromAnimation(animation);
+                    SubTexture[] subTextures = sparrowAnimationPack.GetSubTexturesFromAnimationDefinition(animation);
 
                     foreach (SubTexture subTexture in subTextures)
                     {
