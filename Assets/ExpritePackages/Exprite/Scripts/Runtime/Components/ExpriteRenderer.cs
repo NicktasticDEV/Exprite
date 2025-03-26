@@ -16,8 +16,6 @@ namespace Exprite
         public ExpriteAnimationPack sparrowAnimationPack;
         public bool preloadAnimationPack = false;
 
-        // Constants
-
         // Static fields
         private static Dictionary<ExpriteAnimationPack, Dictionary<string, List<Sprite>>> preloadedAnimations = new Dictionary<ExpriteAnimationPack, Dictionary<string, List<Sprite>>>();
 
@@ -29,6 +27,7 @@ namespace Exprite
         public AnimationDefinition? currentAnimation { get; private set; }
         public bool isPlaying { get; private set; }
 
+        // Initialize stuff
         void Awake()
         {
             // Get Components
@@ -134,25 +133,6 @@ namespace Exprite
             }
         }
     
-        void OnSparrowAnimationPackChanged()
-        {
-            Debug.Log("Sparrow Animation Pack Changed");
-            if (preloadAnimationPack)
-            {
-                PreloadAnimationPack();
-            }
-        }
-
-        #if UNITY_EDITOR
-        void OnExitPlayMode(PlayModeStateChange state)
-        {
-            if (state == PlayModeStateChange.ExitingPlayMode)
-            {
-                preloadedAnimations.Clear();
-            }
-        }
-        #endif
-
         void PreloadAnimationPack()
         {
             if (!preloadedAnimations.ContainsKey(sparrowAnimationPack))
@@ -194,6 +174,24 @@ namespace Exprite
             }
             
         }
+
+        void OnSparrowAnimationPackChanged()
+        {
+            Debug.Log("Sparrow Animation Pack Changed");
+            if (preloadAnimationPack)
+            {
+                PreloadAnimationPack();
+            }
+        }
     
+        #if UNITY_EDITOR
+        void OnExitPlayMode(PlayModeStateChange state)
+        {
+            if (state == PlayModeStateChange.ExitingPlayMode)
+            {
+                preloadedAnimations.Clear();
+            }
+        }
+        #endif
     }
 }
