@@ -57,24 +57,24 @@ namespace Exprite
             }
         }
 
-        public void Play(string animationName)
+        public void Play(string animationName, int frame=0)
         {
             if (isPlaying)
             {
                 StopAllCoroutines();
             }
 
-            StartCoroutine(PlayAnimation(animationName));
+            StartCoroutine(PlayAnimation(animationName, frame));
         }
 
-        IEnumerator PlayAnimation(string animationName)
+        IEnumerator PlayAnimation(string animationName, int frame=0)
         {
             AnimationDefinition animation = sparrowAnimationPack.GetAnimationDefinitionByName(animationName);
 
             isPlaying = true;
             currentAnimation = animation;
 
-            int frameIndex = 0;
+            int frameIndex = frame;
             float timePerFrame = 1f / animation.fps;
             float timeAccumulator = 0f;
 
